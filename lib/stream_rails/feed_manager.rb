@@ -43,6 +43,15 @@ module StreamRails
         news_feed.follow(target_feed.slug, target_feed.user_id)
       end 
     end
+    
+     def unfollow_feed(feed_type, user_id, target_id)
+      return unless StreamRails.enabled?
+      target_feed = get_feed(feed_type, target_id)
+      @news_feeds.each do |_, feed|
+        news_feed = get_feed(feed, user_id)
+        news_feed.unfollow(target_feed.slug, target_feed.user_id)
+      end 
+    end
 
     def unfollow_user(user_id, target_id)
       return unless StreamRails.enabled?
